@@ -1,7 +1,14 @@
 import React from "react";
+import Banner from "../Banner";
+import HowWork from "../HowWork";
 
 const Home = () => {
-  return <div>this id home</div>;
+  return (
+    <div>
+      <Banner />
+      <HowWork />
+    </div>
+  );
 };
 
 export default Home;
