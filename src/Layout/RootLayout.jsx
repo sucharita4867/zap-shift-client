@@ -5,7 +5,7 @@ import Navbar from "../Pages/Shred/Navbar";
 
 const RootLayout = () => {
   return (
-    <div className="w-11/12 mx-auto bg-[#eaeced]">
+    <div className="w-11/12 mx-auto ">
       <Navbar />
       <Outlet />
       <Footer />
