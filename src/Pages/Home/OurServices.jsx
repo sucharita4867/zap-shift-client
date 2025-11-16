@@ -71,7 +71,7 @@ const OurServices = () => {
             <img
               src={item.icon}
               alt={item.title}
-              className="w-12 h-12 object-contain mb-3 flex flex-col items-center"
+              className="w-16 p-3 h-16 rounded-full object-contain mb-3 flex flex-col items-center bg-white "
             />
             <h3 className="text-lg font-semibold text-secondary mb-1">
               {item.title}
