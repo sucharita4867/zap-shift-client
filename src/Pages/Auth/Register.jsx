@@ -31,7 +31,7 @@ const Register = () => {
         }`;
 
         axios.post(image_API_URL, formData).then((res) => {
-          console.log("after image upload", res.data.data.url);
+          // console.log("after image upload", res.data.data.url);
 
           // updata user profile to firebase
 
