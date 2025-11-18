@@ -13,10 +13,12 @@ const Register = () => {
   } = useForm();
 
   const handleRegister = (data) => {
-    console.log(data);
+    console.log(data.photo[0]);
     registerUser(data.email, data.password)
       .then((result) => {
         console.log(result);
+
+        
       })
       .catch((err) => {
         console.log(err);
@@ -30,6 +32,29 @@ const Register = () => {
         </h3>
         <p className=" text-center">Please Register</p>
         <fieldset className="fieldset">
+          {/* Name */}
+          <label className="label">Name</label>
+          <input
+            type="text"
+            {...register("name", { required: true })}
+            className="input"
+            placeholder="Your Name"
+          />
+          {errors.name?.type === "required" && (
+            <p className="text-red-600">Name is required</p>
+          )}
+          {/* photo image field */}
+          <label className="label">Name</label>
+          <input
+            type="file"
+            {...register("photo", { required: true })}
+            className="file-input"
+            placeholder="Your Photo"
+          />
+          {errors.photo?.type === "required" && (
+            <p className="text-red-600">Photo is required</p>
+          )}
+          {/* email */}
           <label className="label">Email</label>
           <input
             type="email"
