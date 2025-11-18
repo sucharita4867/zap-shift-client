@@ -76,7 +76,7 @@ const Navbar = () => {
             Login
           </Link>
         )}
-        <Link to="/beARider" className="btn mx-4 bg-primary">
+        <Link to="/rider" className="btn mx-4 bg-primary">
           Be a Rider
         </Link>
       </div>

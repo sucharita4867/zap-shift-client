@@ -1,11 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import UseAuth from "../../Hooks/UseAuth";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "./SocialLogin";
+import axios from "axios";
 
 const Register = () => {
-  const { registerUser } = UseAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { registerUser, updateUserProfile } = UseAuth();
   const {
     register,
     handleSubmit,
@@ -14,11 +17,37 @@ const Register = () => {
 
   const handleRegister = (data) => {
     console.log(data.photo[0]);
+    const profileImg = data.photo[0];
+
     registerUser(data.email, data.password)
       .then((result) => {
         console.log(result);
+        // 1. store the image in form data
+        const formData = new FormData();
+        formData.append("image", profileImg);
+        // 2. send the photo to store and get the url
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_image_host_key
+        }`;
 
-        
+        axios.post(image_API_URL, formData).then((res) => {
+          console.log("after image upload", res.data.data.url);
+
+          // updata user profile to firebase
+
+          const profile = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+          };
+          updateUserProfile(profile)
+            .then(() => {
+              console.log("user profile updated done");
+              navigate(location.state || "/");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -99,7 +128,11 @@ const Register = () => {
         </fieldset>
         <p>
           Already have an account
-          <Link className="text-blue-600 underline font-bold" to="/login">
+          <Link
+            state={location.state}
+            className="text-blue-600 underline font-bold"
+            to="/login"
+          >
             Login
           </Link>
         </p>
