@@ -16,7 +16,6 @@ const Coverage = () => {
   const position = [23.685, 90.3563];
   const serviceCenter = useLoaderData();
   const mapRef = useRef(null);
-  //   console.log(serviceCenter);
 
   const handleSearch = (e) => {
     e.preventDefault();

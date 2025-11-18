@@ -15,7 +15,7 @@ const Login = () => {
   } = useForm();
 
   const handleLogin = (data) => {
-    console.log("from login data", data);
+    // console.log("from login data", data);
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
