@@ -2,14 +2,18 @@ import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import UseAuth from "../../Hooks/UseAuth";
 
 const SendParcel = () => {
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
+  const axiosSecure = useAxiosSecure();
+  const { user } = UseAuth();
 
   const serviceCenter = useLoaderData();
   const regionsDuplicate = serviceCenter.map((c) => c.region);
@@ -48,6 +52,7 @@ const SendParcel = () => {
       }
     }
     console.log("cost", cost);
+    data.cost = cost;
     Swal.fire({
       title: "Agree with the Cost",
       text: `You will be charged ${cost} taka`,
@@ -55,14 +60,18 @@ const SendParcel = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes!",
+      confirmButtonText: "I agree!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Swal.fire({
-        //   title: "Deleted!",
-        //   text: "Your file has been deleted.",
-        //   icon: "success",
-        // });
+        // save the parcel in database
+        axiosSecure.post("/parcels", data).then((res) => {
+          console.log("after saving parcel", res.data);
+        });
+        Swal.fire({
+          title: "parcels saving!",
+          text: "Your parcel has been saving.",
+          icon: "success",
+        });
       }
     });
   };
@@ -128,6 +137,7 @@ const SendParcel = () => {
             <input
               type="text "
               {...register("senderName")}
+              defaultValue={user?.displayName}
               className="input w-full"
               placeholder="Sender Name"
             />
@@ -137,6 +147,7 @@ const SendParcel = () => {
               type="email "
               {...register("senderEmail")}
               className="input w-full"
+              defaultValue={user?.email}
               placeholder="Sender Email"
             />
 
