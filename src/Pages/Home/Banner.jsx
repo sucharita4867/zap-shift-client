@@ -6,18 +6,19 @@ import banner2 from "../../assets/banner/banner2.png";
 import banner3 from "../../assets/banner/banner3.png";
 const Banner = () => {
   return (
-    <Carousel autoPlay={true}
-      infiniteLoop={true}>
-      <div>
-        <img src={banner1} />
-      </div>
-      <div>
-        <img src={banner2} />
-      </div>
-      <div>
-        <img src={banner3} />
-      </div>
-    </Carousel>
+    <div className="mt-10">
+      <Carousel autoPlay={true} infiniteLoop={true}>
+        <div>
+          <img src={banner1} />
+        </div>
+        <div>
+          <img src={banner2} />
+        </div>
+        <div>
+          <img src={banner3} />
+        </div>
+      </Carousel>
+    </div>
   );
 };
 
