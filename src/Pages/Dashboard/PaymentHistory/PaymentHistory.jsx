@@ -1,11 +1,10 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import UseAuth from "../../../Hooks/UseAuth";
+import useUserAuth from "../../../Hooks/useUserAuth";
 
 const PaymentHistory = () => {
-  const { user } = UseAuth();
-  console.log(user);
+  const { user } = useUserAuth();
   const axiosSecure = useAxiosSecure();
   const { data: payments = [] } = useQuery({
     queryKey: ["payments", user.email],

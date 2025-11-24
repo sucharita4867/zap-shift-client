@@ -3,7 +3,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import UseAuth from "../../Hooks/UseAuth";
+import useUserAuth from "../../Hooks/useUserAuth";
 
 const SendParcel = () => {
   const {
@@ -13,7 +13,7 @@ const SendParcel = () => {
     // formState: { errors },
   } = useForm();
   const axiosSecure = useAxiosSecure();
-  const { user } = UseAuth();
+  const { user } = useUserAuth();
 
   const serviceCenter = useLoaderData();
   const regionsDuplicate = serviceCenter.map((c) => c.region);

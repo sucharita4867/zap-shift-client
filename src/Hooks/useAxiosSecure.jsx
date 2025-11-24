@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import UseAuth from "./UseAuth";
+import useUserAuth from "./useUserAuth";
+import { useNavigate } from "react-router";
 
 const axiosSecure = axios.create({
   baseURL: "http://localhost:3000",
 });
 const useAxiosSecure = () => {
-  const { user } = UseAuth();
+  const { user, logOut } = useUserAuth();
+  const navigate = useNavigate();
   useEffect(() => {
     // intercept request
     const reqInterceptor = axiosSecure.interceptors.request.use((config) => {
@@ -20,12 +22,20 @@ const useAxiosSecure = () => {
       },
       (error) => {
         console.log(error);
+        const statusCode = error.status;
+        if (statusCode === 401 || statusCode === 403) {
+          logOut().then(() => {
+            navigate("/login");
+          });
+        }
+
         return Promise.reject(error);
       }
     );
 
     return () => {
       axiosSecure.interceptors.request.eject(reqInterceptor);
+      axiosSecure.interceptors.response.eject(resInterceptor);
     };
   }, [user]);
 

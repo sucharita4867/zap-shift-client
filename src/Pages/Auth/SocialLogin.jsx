@@ -1,9 +1,9 @@
 import React from "react";
-import UseAuth from "../../Hooks/UseAuth";
 import { useLocation, useNavigate } from "react-router";
+import useUserAuth from "../../Hooks/useUserAuth";
 
 const SocialLogin = () => {
-  const { signInGoogle } = UseAuth();
+  const { signInGoogle } = useUserAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
