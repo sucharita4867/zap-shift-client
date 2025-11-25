@@ -4,6 +4,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useUserAuth from "../../Hooks/useUserAuth";
 import { useLoaderData } from "react-router";
 import agentImg from "../../assets/agent-pending.png";
+import Swal from "sweetalert2";
 
 const Rider = () => {
   const { register, handleSubmit, control } = useForm();
@@ -27,6 +28,18 @@ const Rider = () => {
 
   const handleRiderApplication = (data) => {
     console.log("Rider form data:", data);
+    axiosSecure.post("/riders", data).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title:
+            "Your application has been submitted, We will reach to you 45 days",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    });
   };
 
   return (
@@ -60,6 +73,7 @@ const Rider = () => {
                     defaultValue={user?.displayName}
                     className="input w-full"
                     placeholder="Enter Your Name"
+                    required
                   />
                 </div>
 
@@ -84,6 +98,7 @@ const Rider = () => {
                     defaultValue={user?.email}
                     className="input w-full"
                     placeholder="Your Email"
+                    required
                   />
                 </div>
 
@@ -113,15 +128,28 @@ const Rider = () => {
                 </select>
               </div>
 
-              {/* Address */}
-              <div>
-                <label className="label text-lg">Your Address</label>
-                <input
-                  type="text"
-                  {...register("address")}
-                  className="input w-full"
-                  placeholder="Full Address"
-                />
+              {/*  address + bikeModel  */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* address */}
+                <div>
+                  <label className="label text-lg">Your Address</label>
+                  <input
+                    type="text"
+                    {...register("address")}
+                    className="input w-full"
+                    placeholder="Full Address"
+                  />
+                </div>
+                {/* Bike Model */}
+                <div>
+                  <label className="label text-lg">Bike Model</label>
+                  <input
+                    type="text"
+                    {...register("bikeModel")}
+                    className="input w-full"
+                    placeholder="Full Address"
+                  />
+                </div>
               </div>
 
               {/* NID + Contact */}
@@ -175,9 +203,11 @@ const Rider = () => {
             </fieldset>
 
             {/* SUBMIT BUTTON */}
-            <button className="btn btn-primary text-black w-full">
-              Submit Application
-            </button>
+            <input
+              type="submit"
+              className="btn btn-primary text-black w-full"
+              value="Apply as a Rider"
+            />
           </div>
 
           {/* ==== RIGHT SIDE IMAGE ==== */}
