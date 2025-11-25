@@ -6,7 +6,6 @@ import boxImg from "../../assets/customer-top.png";
 
 const Reviews = ({ reviewsPromise }) => {
   const reviews = use(reviewsPromise);
-  console.log(reviews);
   return (
     <div className="mt-10 mb-8 ">
       <div className="text-center mb-8  p-4 ">
