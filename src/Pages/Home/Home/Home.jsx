@@ -4,6 +4,7 @@ import HowWork from "../HowWork";
 import OurServices from "../OurServices";
 import Brands from "../Brands";
 import Reviews from "../Reviews";
+import Loading from "../../../Components/Loading/Loading";
 
 const reviewsPromise = fetch("/reviews.json").then((res) => res.json());
 
@@ -14,7 +15,7 @@ const Home = () => {
       <HowWork />
       <OurServices />
       <Brands />
-      <Suspense fallback={<p>loading...</p>}>
+      <Suspense fallback={<Loading />}>
         <Reviews reviewsPromise={reviewsPromise} />
       </Suspense>
     </div>

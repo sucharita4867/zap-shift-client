@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useParams } from "react-router";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Loading from "../../../Components/Loading/Loading";
 
 const Payment = () => {
   const { parcelId } = useParams();
@@ -15,11 +16,7 @@ const Payment = () => {
     },
   });
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center">
-        <span className="loading loading-dots loading-xl"></span>
-      </div>
-    );
+    return <Loading/>
   }
 
   const handlePayment = async () => {

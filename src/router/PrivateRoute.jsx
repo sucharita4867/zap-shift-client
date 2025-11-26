@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router";
 import useUserAuth from "../Hooks/useUserAuth";
+import Loading from "../Components/Loading/Loading";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useUserAuth();
@@ -8,11 +9,7 @@ const PrivateRoute = ({ children }) => {
   // console.log("location", location);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center">
-        <span className="loading loading-dots loading-xl"></span>
-      </div>
-    );
+    return <Loading />;
   }
   if (!user) {
     return <Navigate state={location.pathname} to="/login"></Navigate>;
