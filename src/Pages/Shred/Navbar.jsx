@@ -27,6 +27,9 @@ const Navbar = () => {
       <li>
         <NavLink to="/coverage">Coverage</NavLink>
       </li>
+      <li>
+        <NavLink to="/rider">Be a Rider</NavLink>
+      </li>
 
       {user && (
         <>
@@ -88,7 +91,7 @@ const Navbar = () => {
           </Link>
         )}
         <Link to="/rider" className="btn mx-4 bg-primary">
-          Be a Rider
+          Sign up{" "}
         </Link>
       </div>
     </div>
