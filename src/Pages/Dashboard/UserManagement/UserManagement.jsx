@@ -6,7 +6,7 @@ import { FiShieldOff } from "react-icons/fi";
 import Swal from "sweetalert2";
 
 const UserManagement = () => {
-  const [searchText, setSearchText] = useState();
+  const [searchText, setSearchText] = useState("");
   const axiosSecure = useAxiosSecure();
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users", searchText],
