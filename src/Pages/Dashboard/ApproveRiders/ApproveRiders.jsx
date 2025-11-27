@@ -50,7 +50,8 @@ const ApproveRiders = () => {
               <th></th>
               <th>Name</th>
               <th>Email</th>
-              <th>Status</th>
+              <th>Application Status</th>
+              <th>Work Status</th>
               <th>District</th>
               <th>Action</th>
             </tr>
@@ -72,6 +73,7 @@ const ApproveRiders = () => {
                     {rider.status}
                   </p>
                 </td>
+                <td>{rider.workStatus}</td>
                 <td>{rider.district}</td>
                 <td>
                   <button className="btn mr-2">
