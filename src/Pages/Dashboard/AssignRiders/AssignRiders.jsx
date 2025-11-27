@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AssignRiders = () => {
+  const [selectedParcel, setSelectedParcel] = useState(null);
   const axiosSecure = useAxiosSecure();
   const riderModalRef = useRef();
   const { data: parcels = [] } = useQuery({
@@ -15,7 +16,19 @@ const AssignRiders = () => {
     },
   });
 
+  const { data: riders = [] } = useQuery({
+    queryKey: ["riders", parcels.senderDistricts, "available"],
+    enabled: !!selectedParcel,
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/riders?status=approved&district=${selectedParcel.senderDistricts}&workStatus=available`
+      );
+      return res.data;
+    },
+  });
+
   const openAssignRiderModal = (parcel) => {
+    setSelectedParcel(parcel);
     riderModalRef.current.showModal();
   };
 
@@ -67,10 +80,8 @@ const AssignRiders = () => {
         className="modal modal-bottom sm:modal-middle"
       >
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">
-            Press ESC key or click the button below to close
-          </p>
+          <h3 className="font-bold text-lg">Riders: {riders.length}!</h3>
+
           <div className="modal-action">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
