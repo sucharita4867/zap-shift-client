@@ -51,7 +51,7 @@ const UserManagement = () => {
   return (
     <div>
       <h2 className="text-secondary text-4xl">Manage Users : {users.length}</h2>
-      {/* search input fild */}
+
       <p>search text: {searchText}</p>
       <label className="input">
         <svg
