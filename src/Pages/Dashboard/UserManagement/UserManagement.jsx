@@ -78,7 +78,7 @@ const UserManagement = () => {
         />
       </label>
 
-      {/* tabel */}
+
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
