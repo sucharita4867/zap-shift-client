@@ -87,15 +87,7 @@ export const router = createBrowserRouter([
         path: "payment-history",
         Component: PaymentHistory,
       },
-      {
-        path: "approve-riders",
-        Component: ApproveRiders,
-        // element: (
-        //   <AdminRoute>
-        //     <ApproveRiders />
-        //   </AdminRoute>
-        // ),
-      },
+     
       {
         path: "payment-success",
         Component: PaymentSuccess,
@@ -103,6 +95,20 @@ export const router = createBrowserRouter([
       {
         path: "payment-cancelled",
         Component: PaymentCancelled,
+      },
+      // router only route
+      {
+        path:'assigned-deliveries'
+      },
+      // admin only route
+       {
+        path: "approve-riders",
+        Component: ApproveRiders,
+        // element: (
+        //   <AdminRoute>
+        //     <ApproveRiders />
+        //   </AdminRoute>
+        // ),
       },
       {
         path: "user-management",
