@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useRef, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AssignRiders = () => {
   const [selectedParcel, setSelectedParcel] = useState(null);
@@ -16,8 +17,8 @@ const AssignRiders = () => {
     },
   });
 
-  const { data: riders = [] } = useQuery({
-    queryKey: ["riders", parcels.senderDistricts, "available"],
+  const { data: riders = [], refetch: parcelsRefetch } = useQuery({
+    queryKey: ["riders", selectedParcel?.senderDistrict, "available"],
     enabled: !!selectedParcel,
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -29,7 +30,31 @@ const AssignRiders = () => {
 
   const openAssignRiderModal = (parcel) => {
     setSelectedParcel(parcel);
+    // console.log(parcel.senderDistricts);
     riderModalRef.current.showModal();
+  };
+  const handleAssignRider = (rider) => {
+    const riderAssignInfo = {
+      riderId: rider._id,
+      riderEmail: rider.email,
+      riderName: rider.name,
+      parcelId: selectedParcel._id,
+    };
+    axiosSecure
+      .patch(`/parcels/${selectedParcel._id}`, riderAssignInfo)
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          riderModalRef.current.close();
+          parcelsRefetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `Rider has been assigned`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
   };
 
   return (
@@ -84,6 +109,36 @@ const AssignRiders = () => {
 
           <div className="modal-action">
             <form method="dialog">
+              {/* table */}
+              <div className="overflow-x-auto">
+                <table className="table table-zebra">
+                  {/* head */}
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Favorite Color</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {riders.map((rider, index) => (
+                      <tr key={rider._id}>
+                        <th>{index + 1}</th>
+                        <td>{rider.email}</td>
+                        <td>
+                          <button
+                            onClick={() => handleAssignRider(rider)}
+                            className="btn text-black bg-primary"
+                          >
+                            Find Riders
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               {/* if there is a button in form, it will close the modal */}
               <button className="btn">Close</button>
             </form>
