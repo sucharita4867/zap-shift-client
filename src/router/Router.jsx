@@ -18,6 +18,8 @@ import ApproveRiders from "../Pages/Dashboard/ApproveRiders/ApproveRiders";
 import UserManagement from "../Pages/Dashboard/UserManagement/UserManagement";
 import AdminRoute from "./AdminRoute";
 import AssignRiders from "../Pages/Dashboard/AssignRiders/AssignRiders";
+import RiderRoute from "./RiderRoute";
+import AssignedDeliveries from "../Pages/Dashboard/AssignedDeliveries/AssignedDeliveries";
 
 export const router = createBrowserRouter([
   {
@@ -87,7 +89,7 @@ export const router = createBrowserRouter([
         path: "payment-history",
         Component: PaymentHistory,
       },
-     
+
       {
         path: "payment-success",
         Component: PaymentSuccess,
@@ -97,36 +99,43 @@ export const router = createBrowserRouter([
         Component: PaymentCancelled,
       },
       // router only route
+
       {
-        path:'assigned-deliveries'
+        path: "assigned-deliveries",
+        element: (
+          <RiderRoute>
+            <AssignedDeliveries />
+          </RiderRoute>
+        ),
       },
+
       // admin only route
-       {
+      {
         path: "approve-riders",
-        Component: ApproveRiders,
-        // element: (
-        //   <AdminRoute>
-        //     <ApproveRiders />
-        //   </AdminRoute>
-        // ),
+        // Component: ApproveRiders,
+        element: (
+          <AdminRoute>
+            <ApproveRiders />
+          </AdminRoute>
+        ),
       },
       {
         path: "user-management",
-        Component: UserManagement,
-        // element: (
-        //   <AdminRoute>
-        //     <UserManagement />
-        //   </AdminRoute>
-        // ),
+        // Component: UserManagement,
+        element: (
+          <AdminRoute>
+            <UserManagement />
+          </AdminRoute>
+        ),
       },
       {
         path: "assign-riders",
-        Component: AssignRiders,
-        // element: (
-        //   <AdminRoute>
-        //     <AssignRiders />
-        //   </AdminRoute>
-        // ),
+        // Component: AssignRiders,
+        element: (
+          <AdminRoute>
+            <AssignRiders />
+          </AdminRoute>
+        ),
       },
     ],
   },

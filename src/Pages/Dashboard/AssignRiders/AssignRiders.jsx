@@ -16,24 +16,28 @@ const AssignRiders = () => {
       return res.data;
     },
   });
+  console.log(parcels);
 
   const { data: riders = [], refetch: parcelsRefetch } = useQuery({
-    queryKey: ["riders", selectedParcel?.senderDistrict, "available"],
+    queryKey: ["riders", selectedParcel?.senderDistricts, "available"],
     enabled: !!selectedParcel,
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/riders?status=approved&district=${selectedParcel.senderDistricts}&workStatus=available`
       );
+      console.log(res.data);
       return res.data;
     },
   });
 
   const openAssignRiderModal = (parcel) => {
     setSelectedParcel(parcel);
-    // console.log(parcel.senderDistricts);
+    // console.log(parcel);
+    console.log(parcel.senderDistricts);
     riderModalRef.current.showModal();
   };
   const handleAssignRider = (rider) => {
+    console.log(rider);
     const riderAssignInfo = {
       riderId: rider._id,
       riderEmail: rider.email,
@@ -61,6 +65,9 @@ const AssignRiders = () => {
     <div>
       <h2 className="text-5xl text-secondary">
         Assign Riders: {parcels.length}
+      </h2>
+      <h2 className="text-5xl text-secondary">
+        Assign Riders: {console.log(riders)}
       </h2>
       {/* // table */}
       <div className="overflow-x-auto">
@@ -110,7 +117,7 @@ const AssignRiders = () => {
           <div className="modal-action">
             <form method="dialog">
               {/* table */}
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto border border-black">
                 <table className="table table-zebra">
                   {/* head */}
                   <thead>
