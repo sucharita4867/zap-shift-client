@@ -38,6 +38,33 @@ const ApproveRiders = () => {
   const handleRejection = (rider) => {
     updateRidersStatus(rider, "rejected");
   };
+  const handleUserDelete = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${_id}`).then((res) => {
+          console.log(res.data);
+          console.log(_id);
+          if (res.data.deletedCount) {
+            // refresh the data in the ui
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Rider request has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <div>
       <h2 className="text-4xl ">Riders pending Approval :{riders.length}</h2>
@@ -82,7 +109,10 @@ const ApproveRiders = () => {
                   <button onClick={() => handleApproval(rider)} className="btn">
                     <FaUserCheck />
                   </button>
-                  <button className="btn mx-2">
+                  <button
+                    onClick={() => handleUserDelete(rider._id)}
+                    className="btn mx-2"
+                  >
                     <FaTrashCan />
                   </button>
                   <button

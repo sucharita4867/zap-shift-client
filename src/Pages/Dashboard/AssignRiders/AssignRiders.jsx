@@ -114,7 +114,7 @@ const AssignRiders = () => {
         <div className="modal-box">
           <h3 className="font-bold text-lg">Riders: {riders.length}!</h3>
 
-          <div className="modal-action">
+          <div className="modal-action flex-col">
             <form method="dialog">
               {/* table */}
               <div className="overflow-x-auto border border-black">
@@ -125,13 +125,14 @@ const AssignRiders = () => {
                       <th></th>
                       <th>Name</th>
                       <th>Email</th>
-                      <th>Favorite Color</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     {riders.map((rider, index) => (
                       <tr key={rider._id}>
                         <th>{index + 1}</th>
+                        <td>{rider.name}</td>
                         <td>{rider.email}</td>
                         <td>
                           <button
