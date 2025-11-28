@@ -17,9 +17,12 @@ const AssignedDeliveries = () => {
       return res.data;
     },
   });
-  const handleAcceptDelivery = (parcel) => {
+  const handleDelivaryStatusUpdate = (parcel, status) => {
     // console.log(parcel);
-    const statusInfo = { deliveryStatus: "rider_arriving" };
+    const statusInfo = { deliveryStatus: status };
+    let message = `Parcel status is updated with ${status
+      .split("_")
+      .join(" ")}`;
     axiosSecure
       .patch(`/parcels/${parcel._id}/status`, statusInfo)
       .then((res) => {
@@ -28,7 +31,7 @@ const AssignedDeliveries = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: `Thank you for accepting`,
+            title: message,
             showConfirmButton: false,
             timer: 2000,
           });
@@ -60,7 +63,9 @@ const AssignedDeliveries = () => {
                   {parcel.deliveryStatus === "driver_assigned" ? (
                     <>
                       <button
-                        onClick={() => handleAcceptDelivery(parcel)}
+                        onClick={() =>
+                          handleDelivaryStatusUpdate(parcel, "rider_arriving")
+                        }
                         className="text-back btn bg-primary"
                       >
                         Accept
@@ -73,7 +78,24 @@ const AssignedDeliveries = () => {
                     <span>Accepted</span>
                   )}
                 </td>
-                <td>Blue</td>
+                <td>
+                  <button
+                    onClick={() =>
+                      handleDelivaryStatusUpdate(parcel, "parcel_picked_up")
+                    }
+                    className="text-back btn bg-primary"
+                  >
+                    Mark as Picked Up
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleDelivaryStatusUpdate(parcel, "parcel_delivered")
+                    }
+                    className=" mx-2 text-back btn bg-primary"
+                  >
+                    Mark as Delivered
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

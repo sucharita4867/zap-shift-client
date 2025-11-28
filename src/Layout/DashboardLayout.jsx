@@ -1,9 +1,16 @@
 import React from "react";
 import { CiDeliveryTruck } from "react-icons/ci";
-import { FaHome, FaMotorcycle, FaRegCreditCard, FaTasks, FaUsers } from "react-icons/fa";
+import {
+  FaHome,
+  FaMotorcycle,
+  FaRegCreditCard,
+  FaTasks,
+  FaUsers,
+} from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../Hooks/useRole";
 import { RiEBikeFill } from "react-icons/ri";
+import { SiGoogletasks } from "react-icons/si";
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -96,6 +103,19 @@ const DashboardLayout = () => {
                     <FaTasks className="my-1.5 inline-block size-4" />
                     <span className="is-drawer-close:hidden">
                       Assigned Deliveries
+                    </span>
+                  </NavLink>
+                </li>
+                {/* Completed Deliveries */}
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Completed Deliveries"
+                    to="/dashboard/completed-deliveries"
+                  >
+                    <SiGoogletasks className="my-1.5 inline-block size-4" />
+                    <span className="is-drawer-close:hidden">
+                      Completed Deliveries
                     </span>
                   </NavLink>
                 </li>
