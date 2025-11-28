@@ -8,6 +8,7 @@ const AssignedDeliveries = () => {
   const { user } = useUserAuth();
   const { data: parcels = [] } = useQuery({
     queryKey: ["parcels", user.email, "driver_assigned"],
+    enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/parcels/riders?riderEmail=${user.email}&deliveryStatus=driver_assigned`
@@ -18,7 +19,7 @@ const AssignedDeliveries = () => {
   return (
     <div>
       <h2>Parcel pending: {parcels.length}</h2>
-      <h2>Parcel pending: {console.log(parcels)}</h2>
+      {/* <h2>Parcel pending: {console.log(parcels)}</h2> */}
       {/* table */}
       <div className="overflow-x-auto">
         <table className="table table-zebra">
@@ -27,7 +28,7 @@ const AssignedDeliveries = () => {
             <tr>
               <th></th>
               <th>Name</th>
-              <th>Job</th>
+              <th>Confirm</th>
               <th>Favorite Color</th>
             </tr>
           </thead>
@@ -36,7 +37,12 @@ const AssignedDeliveries = () => {
               <tr key={parcel._id}>
                 <th>{i + 1}</th>
                 <td>{parcel.parcelName}</td>
-                <td>Quality Control Specialist</td>
+                <td>
+                  <button className="text-back btn bg-primary">Accept</button>
+                  <button className="ms-4 text-back btn bg-warning">
+                    Reject
+                  </button>
+                </td>
                 <td>Blue</td>
               </tr>
             ))}

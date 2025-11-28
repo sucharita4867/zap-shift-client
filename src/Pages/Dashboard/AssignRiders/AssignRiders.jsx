@@ -16,7 +16,6 @@ const AssignRiders = () => {
       return res.data;
     },
   });
-  console.log(parcels);
 
   const { data: riders = [], refetch: parcelsRefetch } = useQuery({
     queryKey: ["riders", selectedParcel?.senderDistricts, "available"],
@@ -25,19 +24,16 @@ const AssignRiders = () => {
       const res = await axiosSecure.get(
         `/riders?status=approved&district=${selectedParcel.senderDistricts}&workStatus=available`
       );
-      console.log(res.data);
       return res.data;
     },
   });
 
   const openAssignRiderModal = (parcel) => {
     setSelectedParcel(parcel);
-    // console.log(parcel);
-    console.log(parcel.senderDistricts);
     riderModalRef.current.showModal();
   };
   const handleAssignRider = (rider) => {
-    console.log(rider);
+    // console.log(rider);
     const riderAssignInfo = {
       riderId: rider._id,
       riderEmail: rider.email,
@@ -66,9 +62,7 @@ const AssignRiders = () => {
       <h2 className="text-5xl text-secondary">
         Assign Riders: {parcels.length}
       </h2>
-      <h2 className="text-5xl text-secondary">
-        Assign Riders: {console.log(riders)}
-      </h2>
+      <h2 className="text-5xl text-secondary"></h2>
       {/* // table */}
       <div className="overflow-x-auto">
         <table className="table table-zebra">
