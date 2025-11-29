@@ -58,7 +58,7 @@ const CompletedDeliveries = () => {
                     // onClick={() => openAssignRiderModal(parcel)}
                     className="btn btn-primary text-black"
                   >
-                    Assign Rider
+                    CashOut
                   </button>
                 </td>
               </tr>
