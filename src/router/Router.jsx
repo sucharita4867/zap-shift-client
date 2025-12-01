@@ -22,6 +22,7 @@ import RiderRoute from "./RiderRoute";
 import AssignedDeliveries from "../Pages/Dashboard/AssignedDeliveries/AssignedDeliveries";
 import CompletedDeliveries from "../Pages/Dashboard/CompletedDeliveries/CompletedDeliveries";
 import ParcelTrack from "../Pages/ParcelTrack/ParcelTrack";
+import DashboardHome from "../Pages/Dashboard/DashbordHome/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -56,9 +57,9 @@ export const router = createBrowserRouter([
         loader: () => fetch("/sceviceCenter.json").then((res) => res.json()),
       },
       {
-        path: '/parcel-track/:trackingId',
-        Component: ParcelTrack
-      }
+        path: "/parcel-track/:trackingId",
+        Component: ParcelTrack,
+      },
     ],
   },
   {
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
+        index: true,
+        Component: DashboardHome,
+      },
+      {
         path: "my-parcels",
         Component: MyParcels,
       },
@@ -95,7 +100,6 @@ export const router = createBrowserRouter([
         path: "payment-history",
         Component: PaymentHistory,
       },
-
       {
         path: "payment-success",
         Component: PaymentSuccess,
@@ -118,7 +122,7 @@ export const router = createBrowserRouter([
         path: "completed-deliveries",
         element: (
           <RiderRoute>
-            <CompletedDeliveries/>
+            <CompletedDeliveries />
           </RiderRoute>
         ),
       },

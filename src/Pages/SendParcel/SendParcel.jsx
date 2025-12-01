@@ -60,7 +60,7 @@ const SendParcel = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "I agree!",
+      confirmButtonText: "confirm and continue payment!",
     }).then((result) => {
       if (result.isConfirmed) {
         // save the parcel in database
@@ -68,9 +68,11 @@ const SendParcel = () => {
           console.log("after saving parcel", res.data);
         });
         Swal.fire({
-          title: "parcels saving!",
-          text: "Your parcel has been saving.",
+          position: "top-end",
           icon: "success",
+          title: "parcel has created . please pay",
+          showConfirmButton: false,
+          timer: 2000,
         });
       }
     });
