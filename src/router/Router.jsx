@@ -23,6 +23,7 @@ import AssignedDeliveries from "../Pages/Dashboard/AssignedDeliveries/AssignedDe
 import CompletedDeliveries from "../Pages/Dashboard/CompletedDeliveries/CompletedDeliveries";
 import ParcelTrack from "../Pages/ParcelTrack/ParcelTrack";
 import DashboardHome from "../Pages/Dashboard/DashbordHome/DashboardHome";
+import AboutUs from "../Components/AboutUs/AboutUs";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: () => fetch("/sceviceCenter.json").then((res) => res.json()),
+      },
+      {
+        path: "/About-us",
+        Component: AboutUs,
       },
       {
         path: "/coverage",

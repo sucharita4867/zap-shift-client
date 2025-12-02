@@ -41,7 +41,7 @@ const AdminDashboardHome = () => {
               </svg>
             </div>
             <div className="stat-title text-2xl text-secondary ">
-              {stat._id}
+              {stat.status}
             </div>
             <div className="stat-value">{stat.count}</div>
           </div>
