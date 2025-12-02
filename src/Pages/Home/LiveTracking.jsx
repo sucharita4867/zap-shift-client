@@ -27,23 +27,27 @@ const LiveTracking = () => {
   return (
     <div className="w-11/12 mx-auto px-4 py-12 space-y-8">
       {features.map((feature, index) => (
-        <div
-          key={index}
-          className="flex flex-col md:flex-row items-center justify-between gap-3 bg-[#f9f9fa] p-8 rounded-xl shadow-sm"
-        >
-          {/* Image */}
-          <img src={feature.img} alt={feature.title} className="w-40 md:w-56" />
+       <div
+  key={index}
+  className="flex flex-col md:flex-row items-center justify-between gap-6 bg-[#f9f9fa] p-8 rounded-xl shadow-sm"
+>
+  {/* Image */}
+  <img src={feature.img} alt={feature.title} className="w-40 md:w-56" />
 
-          {/* Text */}
-          <div className="text-center md:text-left">
-            <h3 className="text-2xl font-semibold text-secondary mb-2">
-              {feature.title}
-            </h3>
-            <p className="text-gray-600 text-sm md:text-base leading-6 max-w-xl">
-              {feature.description}
-            </p>
-          </div>
-        </div>
+  {/* Divider Line (only for desktop view) */}
+  <div className="hidden md:block w-[2px] h-24 border-r border-dashed border-gray-400"></div>
+
+  {/* Text */}
+  <div className="text-center md:text-left">
+    <h3 className="text-2xl font-semibold text-secondary mb-2">
+      {feature.title}
+    </h3>
+    <p className="text-gray-600 text-sm md:text-base leading-6 max-w-xl">
+      {feature.description}
+    </p>
+  </div>
+</div>
+
       ))}
     </div>
   );
