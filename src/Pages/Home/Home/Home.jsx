@@ -5,6 +5,7 @@ import OurServices from "../OurServices";
 import Brands from "../Brands";
 import Reviews from "../Reviews";
 import Loading from "../../../Components/Loading/Loading";
+import LiveTracking from "../LiveTracking";
 
 const reviewsPromise = fetch("/reviews.json").then((res) => res.json());
 
@@ -15,6 +16,7 @@ const Home = () => {
       <HowWork />
       <OurServices />
       <Brands />
+      <LiveTracking />
       <Suspense fallback={<Loading />}>
         <Reviews reviewsPromise={reviewsPromise} />
       </Suspense>
