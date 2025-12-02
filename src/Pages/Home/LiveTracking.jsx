@@ -7,19 +7,19 @@ const features = [
     title: "Live Parcel Tracking",
     description:
       "Stay updated in real-time with our live parcel tracking. Monitor your shipment’s journey and get instant status updates for complete peace of mind.",
-    img: { img2 },
+    img: img2,
   },
   {
     title: "100% Safe Delivery",
     description:
       "We ensure your parcels are handled with great care and delivered securely. Our trusted process guarantees safe and damage-free delivery every time.",
-    img: { img1 },
+    img: img1,
   },
   {
     title: "24/7 Call Center Support",
     description:
       "Our dedicated support team is available around the clock to assist you with any questions, updates, or delivery concerns—anytime you need us.",
-    img: { img2 },
+    img: img2,
   },
 ];
 
@@ -29,10 +29,10 @@ const LiveTracking = () => {
       {features.map((feature, index) => (
         <div
           key={index}
-          className="flex flex-col md:flex-row items-center justify-between gap-6 bg-[#f9f9fa] p-8 rounded-xl shadow-sm"
+          className="flex flex-col md:flex-row items-center justify-between gap-3 bg-[#f9f9fa] p-8 rounded-xl shadow-sm"
         >
           {/* Image */}
-          <img src={img1} alt={feature.title} className="w-40 md:w-56" />
+          <img src={feature.img} alt={feature.title} className="w-40 md:w-56" />
 
           {/* Text */}
           <div className="text-center md:text-left">
