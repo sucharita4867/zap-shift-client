@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
+    <div className="p-12 bg-white rounded-xl my-8">
       <h2 className="text-4xl font-bold text-secondary mb-3">About Us</h2>
       <p className="text-gray-500 mb-8">
         Enjoy fast, reliable parcel delivery with real-time tracking and zero

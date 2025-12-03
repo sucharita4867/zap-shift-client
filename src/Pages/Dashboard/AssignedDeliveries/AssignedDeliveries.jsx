@@ -44,7 +44,9 @@ const AssignedDeliveries = () => {
   };
   return (
     <div>
-      <h2>Parcel pending: {parcels.length}</h2>
+      <h2 className="text-4xl text-secondary">
+        Parcel pending: {parcels.length}
+      </h2>
       {/* <h2>Parcel pending: {console.log(parcels)}</h2> */}
       {/* table */}
       <div className="overflow-x-auto">
