@@ -47,7 +47,7 @@ const OurServices = () => {
     },
   ];
   return (
-    <div className="bg-secondary my-6 rounded-2xl p-8">
+    <div className="bg-secondary my-10 rounded-2xl p-8">
       <div>
         <h1 className="text-3xl text-center my-6 font-bold text-white">
           Our Services
