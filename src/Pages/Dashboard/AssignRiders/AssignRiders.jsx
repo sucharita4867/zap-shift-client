@@ -8,14 +8,16 @@ const AssignRiders = () => {
   const [selectedParcel, setSelectedParcel] = useState(null);
   const riderModalRef = useRef();
 
-  const { data: parcels = [] } = useQuery({
+  const { data: parcels = [], refetch: parcelsRefetch } = useQuery({
     queryKey: ["parcels"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/parcels");
+      const res = await axiosSecure.get(
+        "/parcels"
+      );
       return res.data;
     },
   });
-  const { data: riders = [], refetch: parcelsRefetch } = useQuery({
+  const { data: riders = [], refetch: riderRefetch } = useQuery({
     queryKey: ["riders", selectedParcel?.senderDistricts, "available"],
     enabled: !!selectedParcel,
     queryFn: async () => {
@@ -46,6 +48,7 @@ const AssignRiders = () => {
         if (res.data.modifiedCount) {
           riderModalRef.current.close();
           parcelsRefetch();
+          riderRefetch();
           Swal.fire({
             position: "top-end",
             icon: "success",

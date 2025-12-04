@@ -24,6 +24,7 @@ import CompletedDeliveries from "../Pages/Dashboard/CompletedDeliveries/Complete
 import ParcelTrack from "../Pages/ParcelTrack/ParcelTrack";
 import DashboardHome from "../Pages/Dashboard/DashbordHome/DashboardHome";
 import AboutUs from "../Components/AboutUs/AboutUs";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -161,5 +162,10 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+
+  {
+    path: "*",
+    Component: ErrorPage,
   },
 ]);
