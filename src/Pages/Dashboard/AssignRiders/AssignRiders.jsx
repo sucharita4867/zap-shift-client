@@ -17,6 +17,8 @@ const AssignRiders = () => {
       return res.data;
     },
   });
+
+  
   const { data: riders = [], refetch: riderRefetch } = useQuery({
     queryKey: ["riders", selectedParcel?.senderDistricts, "available"],
     enabled: !!selectedParcel,

@@ -30,7 +30,8 @@ const AssignedDeliveries = () => {
     axiosSecure
       .patch(`/parcels/${parcel._id}/status`, statusInfo)
       .then((res) => {
-        if (res.data.modifiedCount) {
+        console.log(res);
+        if (res.data) {
           refetch();
           Swal.fire({
             position: "top-end",
